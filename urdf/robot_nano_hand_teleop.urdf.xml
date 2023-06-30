@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<robot name="robot_nano_hand_teleop">
+
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 1.57"/>
+      <geometry>
+	<mesh filename="file:///home/cyril/workspace/robot_nano_hand_teleop/models/robot_nano_hand_base.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name="palm_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 1.57"/>
+      <geometry>
+	<mesh filename="file:///home/cyril/workspace/robot_nano_hand_teleop/models/robot_nano_hand_palm.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <!-- joint between base and palm links -->
+  <joint name="base_palm_joint" type="revolute">
+    <origin xyz="0 0 0.132" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="palm_link" />
+    <axis xyz="0 1 0"/>
+    <limit effort="10" velocity="10" lower="0.0" upper="1.57"/>
+  </joint>
+
+  <!-- Finger 1 -->
+  <link name="finger1_1_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 1.57"/>
+      <geometry>
+	<mesh filename="file:///home/didine/workspace/robot_nano_hand_teleop/models/robot_nano_hand_palm.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="palm_finger1_1_joint" type="revolute">
+    <origin xyz="0.015141 -0.034337 0.105315" rpy="-4.22 1.68 5.35" />
+    <parent link="palm_link" />
+    <child link="finger1_1_link" />
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="0.0" upper="1.57"/>
+  </joint>
+  
+  <link name="finger1_2_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 3.1416 0"/>
+      <geometry>
+	<mesh filename= "file:///home/didine/workspace/robot_nano_hand_teleop/models/robot_nano_hand_palm.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="finger1_1_finger1_2_joint" type="revolute">
+    <origin xyz="-0.002 0 0" rpy="0.157 -0.002 1.567" />
+    <parent link="finger1_1_link" />
+    <child link="finger1_2_link" />
+    <axis xyz="1 0 0"/>
+    <limit effort="10" velocity="10" lower="0.0" upper="1.57"/>
+  </joint>
+</robot>
